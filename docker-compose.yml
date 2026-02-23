@@ -1,0 +1,36 @@
+services:
+  app:
+    image: ghcr.io/cyph3r-csec/bug-bounty-center:latest
+    container_name: bugbounty-app
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: "file:/app/data/dev.db"
+    volumes:
+      - app_data:/app/data
+    restart: unless-stopped
+
+    # Security hardening
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:noexec,nosuid,size=64m
+      - /app/.next/cache:noexec,nosuid,size=256m
+    cap_drop:
+      - ALL
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+          pids: 256
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  app_data:
+    name: bugbounty-data
