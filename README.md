@@ -30,7 +30,7 @@
 
 ```bash
 mkdir bugbounty && cd bugbounty
-curl -O https://raw.githubusercontent.com/Cyph3R-csec/bug-bounty-center-deploy/main/docker-compose.yml
+curl -O https://raw.githubusercontent.com/Cyph3R-csec/Bug-Bounty-Center-Deploy/main/docker-compose.yml
 docker compose up -d
 ```
 
