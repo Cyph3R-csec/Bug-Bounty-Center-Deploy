@@ -16,15 +16,17 @@ services:
       - no-new-privileges:true
     read_only: true
     tmpfs:
-      - /tmp:noexec,nosuid,size=64m
+      - /tmp:nosuid,size=512m
       - /app/.next/cache:noexec,nosuid,size=256m
     cap_drop:
       - ALL
+    cap_add:
+      - NET_RAW # Required for naabu (port scanning)
     deploy:
       resources:
         limits:
-          memory: 2048M
-          pids: 256
+          memory: 4096M
+          pids: 512
     logging:
       driver: json-file
       options:

@@ -37,7 +37,7 @@ Instead of juggling spreadsheets, text files, and scattered notes, you get a sin
 ### Requirements
 
 - [Docker](https://docs.docker.com/get-docker/) installed and running
-- 2 GB of available RAM
+- 4 GB of available RAM
 - Linux, macOS, or Windows
 
 ### Option A — Docker Compose (recommended)
@@ -60,9 +60,10 @@ docker run -d \
   -p 127.0.0.1:3000:3000 \
   -v bugbounty-data:/app/data \
   --read-only \
-  --tmpfs /tmp:noexec,nosuid,size=64m \
+  --tmpfs /tmp:nosuid,size=512m \
   --tmpfs /app/.next/cache:noexec,nosuid,size=256m \
   --cap-drop ALL \
+  --cap-add NET_RAW \
   --security-opt no-new-privileges:true \
   --restart unless-stopped \
   ghcr.io/cyph3r-csec/bug-bounty-center:latest
@@ -151,9 +152,9 @@ The included `docker-compose.yml` applies the following hardening out of the box
 |---------|-------------|
 | **Localhost binding** | Binds to `127.0.0.1` — not accessible from your local network |
 | **Read-only filesystem** | Root filesystem is mounted read-only |
-| **No capabilities** | All Linux capabilities are dropped |
+| **Minimal capabilities** | All Linux capabilities dropped, only `NET_RAW` added for port scanning |
 | **No privilege escalation** | `no-new-privileges` prevents setuid binaries |
-| **Resource limits** | Memory capped at 2 GB, max 256 processes |
+| **Resource limits** | Memory capped at 4 GB, max 512 processes |
 | **Log rotation** | Prevents log files from exhausting disk space |
 
 ---
