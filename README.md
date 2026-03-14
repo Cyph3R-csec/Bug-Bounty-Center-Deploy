@@ -48,7 +48,7 @@ curl -O https://raw.githubusercontent.com/Cyph3R-csec/Bug-Bounty-Center-Deploy/m
 docker compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:13337](http://localhost:13337) in your browser.
 
 > The included `docker-compose.yml` applies security hardening by default. See the [Security](#security) section for details.
 
@@ -57,7 +57,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ```bash
 docker run -d \
   --name bugbounty-app \
-  -p 127.0.0.1:3000:3000 \
+  -p 127.0.0.1:13337:3000 \
   -v bugbounty-data:/app/data \
   --read-only \
   --tmpfs /tmp:nosuid,size=512m \
@@ -69,13 +69,13 @@ docker run -d \
   ghcr.io/cyph3r-csec/bug-bounty-center:latest
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:13337](http://localhost:13337) in your browser.
 
 ---
 
 ## Features
 
-Bug Bounty Center includes **33+ features** built for the complete hunting workflow:
+Bug Bounty Center includes **40 features** built for the complete hunting workflow:
 
 | Category | Highlights |
 |----------|-----------|
@@ -162,7 +162,7 @@ The included `docker-compose.yml` applies the following hardening out of the box
 ## Troubleshooting
 
 <details>
-<summary><strong>Port 3000 is already in use</strong></summary>
+<summary><strong>Port 13337 is already in use</strong></summary>
 
 Edit the port mapping in `docker-compose.yml`:
 
